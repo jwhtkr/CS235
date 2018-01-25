@@ -1,0 +1,16 @@
+Salazar	21	Spookfish
+Weldon	22	Tarwhine
+Stel	10	Hammerjaw
+Abramo	2	Tuna
+Hafsa	1	Inconnu
+Artur	98	Bigeye
+Ruth	14	Moonfish
+Alzay 	97	Ponyfish
+Arkhip	38	Ayu
+Dean	76	Catalufa
+Pablo	65	Threadfin
+Taro	16	Basslet
+Sandy	17	Sheepshead
+Antonio	2	Whiff
+Rudo	94	Ragfish
+Search Mackerel

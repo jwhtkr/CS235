@@ -1,0 +1,2 @@
+Lab1: main.cpp ArenaInterface.h FighterInterface.h Arena.h Arena.cpp Fighter.h Fighter.cpp Archer.h Archer.cpp Cleric.h Cleric.cpp Robot.h Robot.cpp
+	g++ -std=c++11 main.cpp Arena.cpp Fighter.cpp Archer.cpp Cleric.cpp Robot.cpp -o Lab1
