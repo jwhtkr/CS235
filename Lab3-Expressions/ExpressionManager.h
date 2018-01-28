@@ -6,6 +6,20 @@ using namespace std;
 
 class ExpressionManager: public ExpressionManagerInterface
 {
+    private:
+        static const char LEFT_PAREN;
+        static const char LEFT_BRACE;
+        static const char LEFT_BRACKET;
+        static const char RIGHT_PAREN;
+        static const char RIGHT_BRACE;
+        static const char RIGHT_BRACKET;
+        
+        static const char PLUS ;
+        static const char MINUS;
+        static const char MULTIPLY;
+        static const char DIVIDE;
+        static const char MOD;
+    
     public:
         ExpressionManager(){}
         ~ExpressionManager(){}

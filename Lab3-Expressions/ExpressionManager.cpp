@@ -2,6 +2,19 @@
 
 using namespace std;
 
+const char ExpressionManager::LEFT_PAREN = '(';
+const char ExpressionManager::LEFT_BRACE = '[';
+const char ExpressionManager::LEFT_BRACKET = '{';
+const char ExpressionManager::RIGHT_PAREN = ')';
+const char ExpressionManager::RIGHT_BRACE = ']';
+const char ExpressionManager::RIGHT_BRACKET = '}';
+
+const char ExpressionManager::PLUS = '+';
+const char ExpressionManager::MINUS = '-';
+const char ExpressionManager::MULTIPLY = '*';
+const char ExpressionManager::DIVIDE = '/';
+const char ExpressionManager::MOD = '%';
+
 /*
 * Checks whether an expression is balanced on its parentheses
 *
@@ -12,7 +25,63 @@ using namespace std;
 */
 bool ExpressionManager::isBalanced(string expression)
 {
+    std::stack<char> parenStack;
+    bool balanced = true;
+    int index = 0;
     
+    while (index < expression.size() && balanced)
+    {
+        switch (expression[index])
+        {
+            case LEFT_PAREN:
+                parenStack.push(expression[index]);
+                break;
+            case LEFT_BRACE:
+                parenStack.push(expression[index]);
+                break;
+            case LEFT_BRACKET:
+                parenStack.push(expression[index]);
+                break;
+            case RIGHT_PAREN:
+                if(!parenStack.empty())
+                {
+                    if(parenStack.top() != LEFT_PAREN) {balanced = false;}
+                    parenStack.pop();
+                }
+                else
+                {
+                    balanced = false;
+                }
+                break;
+            case RIGHT_BRACE:
+                if(!parenStack.empty())
+                {
+                    if(parenStack.top() != LEFT_BRACE) {balanced = false;}
+                    parenStack.pop();
+                }
+                else
+                {
+                    balanced = false;
+                }
+                break;
+            case RIGHT_BRACKET:
+                if(!parenStack.empty())
+                {
+                    if(parenStack.top() != LEFT_BRACKET) {balanced = false;}
+                    parenStack.pop();
+                }
+                else
+                {
+                    balanced = false;
+                }
+            default:
+                break;
+        }
+        
+        index++;
+    }
+    
+    return balanced && parenStack.empty();
 }
 
 /**
@@ -29,7 +98,7 @@ bool ExpressionManager::isBalanced(string expression)
 */
 string ExpressionManager::postfixToInfix(string postfixExpression)
 {
-    
+    return "";
 }
 
 /*
@@ -43,7 +112,7 @@ string ExpressionManager::postfixToInfix(string postfixExpression)
 */
 string ExpressionManager::postfixEvaluate(string postfixExpression)
 {
-    
+    return "";
 }
 
 /*
@@ -59,5 +128,5 @@ string ExpressionManager::postfixEvaluate(string postfixExpression)
 */
 string ExpressionManager::infixToPostfix(string infixExpression)
 {
-    
+    return "";
 }
