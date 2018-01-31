@@ -1,5 +1,17 @@
 #include <iostream>
+#include <sstream>
+#include <string>
+
+using namespace std;
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
+    string str = "123 abc 1+2 (1a)";
+    string token;
+    stringstream ss (str);
+    
+    while (!ss.eof())
+    {
+        ss >> token;
+        cout << token << endl;
+    }
 }
