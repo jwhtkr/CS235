@@ -15,13 +15,13 @@ void print(set<string> &, ofstream &);
 void print(vector<string> &, ofstream &);
 void print(map<string, string> &, ofstream &);
 
-int main()
+int main(int argc, char *argv[])
 {
     string fileName (""), token (""), previous (""), state("");
     int random(0), M(2);
-    
-    cout << "Input name of file (without file extension) to open: ";
-    cin >> fileName;
+    fileName = argv[1];
+    // cout << "Input name of file (without file extension) to open: ";
+    // cin >> fileName;
     // fileName += ".txt";
     ifstream inFile (fileName + ".txt");
     
