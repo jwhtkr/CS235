@@ -2,6 +2,28 @@
 
 using namespace std;
 
+bool Pathfinder::seeded = false;
+
+Pathfinder::Pathfinder()
+{
+    if (!seeded)
+    {
+        srand(time(NULL));
+        seeded = true;
+    }
+    
+    for (int k = 0; k < 5; k++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                maze[i][j][k] = 1;
+            }
+        }
+    }
+}
+
 //Part 1-----------------------------------------------------------------------------------
 /*
 * toString
@@ -22,9 +44,26 @@ using namespace std;
 * Returns:		string
 *				A single string representing the current maze
 */
-virtual string toString() const
+string Pathfinder::toString() const
 {
+    stringstream ss;
     
+    for (int k = 0; k < 5; k++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                ss << maze[i][j][k];
+                if (i < 4) { ss << " ";}
+            }
+            if (j < 4) {ss << endl;}
+        }
+        if (k < 4) {ss << endl << endl;}
+        else {ss << endl;}
+    }
+    
+    return ss.str();
 }
 
 /*
@@ -36,9 +75,20 @@ virtual string toString() const
 * in the entrance cell (0, 0, 0) and in the exit cell (4, 4, 4).  The generated maze may be
 * solvable or unsolvable, and this method should be able to produce both kinds of mazes.
 */
-virtual void createRandomMaze()
+void Pathfinder::createRandomMaze()
 {
-    
+    for (int k = 0; k < 5; k++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                maze[i][j][k] = rand() % 2;
+                if (i == 4 && j == 4 && k == 4) {maze[i][j][k] = 1;}
+                if (!(i||j||k)) {maze[i][j][k] = 1;}
+            }
+        }
+    }
 }
 //-----------------------------------------------------------------------------------------
 
@@ -57,9 +107,59 @@ virtual void createRandomMaze()
 * Returns:		bool
 *				True if the maze is imported correctly; false otherwise
 */
-virtual bool importMaze(string file_name)
+bool Pathfinder::importMaze(string file_name)
 {
-    
+    ifstream inFile(file_name);
+    int token;
+    int tempMaze[5][5][5];
+    if (!inFile.is_open())
+    {
+        cout << "invalid filename to open" << endl;
+        return false;
+    }
+    else
+    {
+        for (int k = 0; k < 5; k++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    if(inFile >> token)
+                    {
+                        if (!(i||j||k) && token != 1)
+                        {
+                            return false;
+                        }
+                        if (i == 4 && j == 4 && k == 4 && token != 1)
+                        {
+                            return false;
+                        }
+                        tempMaze[i][j][k] = token;
+                    }
+                    else {return false;}
+                }
+            }
+        }
+        if (!inFile.eof())
+        {
+            return false;
+        }
+        else 
+        {
+            for (int k = 0; k < 5; k++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        maze[i][j][k] = tempMaze[i][j][k];
+                    }
+                }
+            }
+            return true;
+        }
+    }
 }
 //-----------------------------------------------------------------------------------------
 
@@ -81,7 +181,51 @@ virtual bool importMaze(string file_name)
 * Returns:		vector<string>
 *				A solution to the current maze, or an empty vector if none exists
 */
-virtual vector<string> solveMaze()
+vector<string> Pathfinder::solveMaze()
 {
-    
+    path.clear();
+    checkPath(0,0,0);
+    for (int k = 0; k < 5; k++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                if (maze[i][j][k] == 2)
+                {
+                    maze[i][j][k] = 1;
+                }
+            }
+        }
+    }
+    return path;
+}
+
+bool Pathfinder::checkPath(int i, int j, int k)
+{
+    stringstream ss ("");
+    ss << "(" << i << ", " << j << ", " << k << ")";
+    path.push_back(ss.str());
+    if (i < 0 || i > 4 || j < 0 || j > 4 || k < 0 || k > 4 || maze[i][j][k] != 1)
+    {
+        path.pop_back();
+        return false;
+    }
+    else if (i == 4 && j == 4 && k == 4)
+    {
+        return true;
+    }
+    else
+    {
+        maze[i][j][k] = 2;
+        if (checkPath(i+1,j,k)||checkPath(i-1,j,k)||checkPath(i,j+1,k)||checkPath(i,j-1,k)||checkPath(i,j,k+1)||checkPath(i,j,k-1))
+        {
+            return true;
+        }
+        else
+        {
+            path.pop_back();
+            return false;
+        }
+    }
 }
