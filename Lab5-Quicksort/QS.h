@@ -1,14 +1,17 @@
 #pragma once
 #include "QSInterface.h"
+#include <sstream>
 
 class QS
 {
 	private:
 		int * arrayptr;
 		int arraySize;
+		int arrayPosition;
+		void sort3(int *, int *, int *);
 	public:
 		QS() {}
-		virtual ~QS() {}
+		virtual ~QS() {clear();}
 	
 		/*
 		* sortAll()
