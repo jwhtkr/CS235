@@ -8,9 +8,11 @@ class QS
 		int * arrayptr;
 		int arraySize;
 		int arrayPosition;
-		void sort3(int *, int *, int *);
+		int left, right;
+		int number;
+
 	public:
-		QS() {}
+		QS() {arrayptr = new int[0];}
 		virtual ~QS() {clear();}
 	
 		/*

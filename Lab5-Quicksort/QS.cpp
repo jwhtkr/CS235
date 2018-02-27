@@ -2,6 +2,8 @@
 
 using namespace std;
 
+void sort3(int *, int *, int *); //helper sort function
+
 /*
 * sortAll()
 *
@@ -12,7 +14,28 @@ using namespace std;
 */
 void QS::sortAll()
 {
-    
+    int pivot (0), oldRight(right), oldLeft(left);
+    if (left < right && QS::getSize() > 1 && number < 100 && (right - left) > 0)
+    {
+        number++;
+        // cout << "in sortAll (" << left << ", " << right << ", ";
+        pivot = QS::medianOfThree(left,right);
+        // cout << pivot << ", ";
+        pivot = QS::partition(left, right, pivot);
+        // cout << pivot << ") " << endl;
+        // if (pivot >= 0)
+        // {
+            // left = oldLeft;
+            right = pivot - 1;
+            // cout << left << ", " << right << "...";
+            QS::sortAll();
+            left = pivot + 1;
+            right = oldRight;
+            // cout << left << ", " << right << "..." << endl;
+            QS::sortAll();
+        // }
+    }
+    else {return;}
 }
 
 /*
@@ -42,16 +65,17 @@ void QS::sortAll()
 */
 int QS::medianOfThree(int left, int right)
 {
-    if (arrayPosition == 0 || left < 0 || right >= arraySize || left > right)
+    // cout << "in median of three...";
+    if (arrayPosition == 0 || left < 0 || right >= arrayPosition || left >= right)
     {
         return -1;
     }
     else
     {
         int middle = (left + right) / 2;
-        if (middle != left || middle != right)
+        if (middle != left && middle != right)
         {
-            QS::sort3(arrayptr + left, arrayptr + middle, arrayptr + right);
+            sort3(arrayptr + left, arrayptr + middle, arrayptr + right);
             return middle;
         }
         else
@@ -93,7 +117,40 @@ int QS::medianOfThree(int left, int right)
 */
 int QS::partition(int left, int right, int pivotIndex)
 {
-    
+    if(arraySize == 0 || arrayPosition == 0 || left < 0 || right >= arraySize 
+        || left >= right || pivotIndex < left || pivotIndex > right)
+    {
+        return -1;
+    }
+    else
+    {
+        int temp;
+        if (pivotIndex != left)
+        {
+            temp = *(arrayptr + pivotIndex);
+            *(arrayptr + pivotIndex) = *(arrayptr + left);
+            *(arrayptr + left) = temp;
+        }
+        int up(left + 1), down(right);
+        do
+        {
+            while(*(arrayptr + up) <= *(arrayptr + left) && up < right) {up++;}
+            while(*(arrayptr + down) > *(arrayptr + left) && down > left) {down--;}
+            if (up < down)
+            {
+                temp = *(arrayptr + up);
+                *(arrayptr + up) = *(arrayptr + down);
+                *(arrayptr + down) = temp;
+            }
+        } while (up < down);
+        if (down != left)
+        {
+            temp = *(arrayptr + left);
+            *(arrayptr + left) = *(arrayptr + down);
+            *(arrayptr + down) = temp;
+        }
+        return down;
+    }
 }
 
 /*
@@ -109,6 +166,7 @@ int QS::partition(int left, int right, int pivotIndex)
 */
 string QS::getArray() const
 {
+    // cout << "in get array...";
     ostringstream ss;
     if (arrayptr == NULL || QS::getSize() == 0)
     {
@@ -119,7 +177,7 @@ string QS::getArray() const
         for (int i = 0; i < QS::getSize(); i++)
         {
              ss << *(arrayptr + i);
-             cout << *(arrayptr + i);
+            //  cout << *(arrayptr + i);
              if (i < QS::getSize()-1)
              {
                  ss << ",";
@@ -136,6 +194,7 @@ string QS::getArray() const
 */
 int QS::getSize() const
 {
+    // cout << "in get size...";
     return arrayPosition;
 }
 
@@ -151,10 +210,12 @@ int QS::getSize() const
 */
 bool QS::addToArray(int value)
 {
+    // cout << "in add to array ...";
     if (arrayPosition < arraySize)
     {
         arrayptr[arrayPosition] = value;
         arrayPosition++;
+        right = arrayPosition - 1;
         return true;
     }
     else {return false;}
@@ -172,11 +233,15 @@ bool QS::addToArray(int value)
 */
 bool QS::createArray(int capacity)
 {
+    // cout << "in creat array...";
     if (capacity > 0 && arrayptr == NULL)
     {
         arraySize = capacity;
         arrayptr = new int[capacity];
         arrayPosition = 0;
+        left = 0;
+        right = arrayPosition - 1;
+        number = 0;
         return true;
     }
     else if (arrayptr != NULL)
@@ -192,14 +257,40 @@ bool QS::createArray(int capacity)
 */
 void QS::clear()
 {
+    // cout << "in clear...";
     delete[] arrayptr;
+    // cout << "array deleted...";
     arrayptr = NULL;
+    // cout << "ptr nulled...";
     arrayPosition = 0;
     arraySize = 0;
+    left = 0;
+    right = 0;
+    // cout << "position and size at 0...completely cleared..." << endl;
 }
 
-//Helper functions
-void QS::sort3 (int * left, int * middle, int * right)
+//Helper sort function
+void sort3 (int * left, int * middle, int * right)
 {
+    // cout << "in sort3...";
+    int temp;
+    if (*left > *middle)
+    {
+        temp = *middle;
+        *middle = *left;
+        *left = temp;
+    }
+    if (*middle > *right)
+    {
+        temp = *middle;
+        *middle = *right;
+        *right = temp;
+    }
+    if (*left > *middle)
+    {
+        temp = *middle;
+        *middle = *left;
+        *left = temp;
+    }
     return;
 }
