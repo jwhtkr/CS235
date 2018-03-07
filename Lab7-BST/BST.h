@@ -6,7 +6,8 @@ using namespace std;
 
 class BST : public BSTInterface 
 {
-private:
+protected:
+Node* root;
     
 public:
 	BST() {}
