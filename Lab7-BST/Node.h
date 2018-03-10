@@ -3,9 +3,15 @@
 
 class Node: public NodeInterface 
 {
-
+	friend class BST;
+protected:
+	int value;
+	Node* left;
+	Node* right;
 public:
-	Node() {}
+	Node() {left = NULL; right = NULL;}
+	Node(int, Node*, Node*);
+	Node(int);
 	virtual ~Node() {}
 
 	/*
@@ -28,5 +34,4 @@ public:
 	* @return the right child of this node or null if it doesn't have one.
 	*/
 	virtual Node * getRightChild() const;
-
 };

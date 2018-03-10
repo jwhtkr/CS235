@@ -2,6 +2,19 @@
 
 using namespace std;
 
+Node::Node(int val, Node* less, Node* more)
+{
+    value = val;
+    left = less;
+    right = more;
+}
+
+Node::Node(int val)
+{
+    value = val;
+    left = NULL;
+    right = NULL;
+}
 /*
 * Returns the data that is stored in this node
 *
@@ -9,7 +22,7 @@ using namespace std;
 */
 int Node::getData() const
 {
-    
+    return value;
 }
 
 /*
@@ -19,7 +32,7 @@ int Node::getData() const
 */
 Node * Node::getLeftChild() const
 {
-    
+    return left;
 }
 
 /*
@@ -29,5 +42,5 @@ Node * Node::getLeftChild() const
 */
 Node * Node::getRightChild() const
 {
-    
+    return right;
 }

@@ -10,7 +10,7 @@ protected:
 Node* root;
     
 public:
-	BST() {}
+	BST() {root = NULL;}
 	virtual ~BST() {}
 
 	//Please note that the class that implements this interface must be made
@@ -43,4 +43,6 @@ public:
 	* Removes all nodes from the tree, resulting in an empty tree.
 	*/
 	virtual void clear();
+	
+	virtual Node* find(int);
 };

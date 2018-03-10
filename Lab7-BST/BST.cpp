@@ -5,6 +5,8 @@ using namespace std;
 //Please note that the class that implements this interface must be made
 //of objects which implement the NodeInterface
 
+Node* find(int);
+
 /*
 * Returns the root node for this tree
 *
@@ -12,7 +14,7 @@ using namespace std;
 */
 Node * BST::getRootNode() const
 {
-    
+    return root;
 }
 
 /*
@@ -23,7 +25,29 @@ Node * BST::getRootNode() const
 */
 bool BST::add(int data)
 {
-    
+    if (root == NULL)
+    {
+        root = new Node(data);
+        return true;
+    }
+    else
+    {
+        Node* tmp = find(data);
+        if (data < tmp -> value)
+        {
+            tmp -> left = new Node(data);
+            return true;
+        }
+        else if (data > tmp -> getData())
+        {
+            tmp -> right = new Node(data);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 
 /*
@@ -43,4 +67,27 @@ bool BST::remove(int data)
 void BST::clear()
 {
     
+}
+
+Node* BST::find (int data)
+{
+    Node* tmp = root;
+    Node* current = tmp;
+    while (current != NULL)
+    {
+        tmp = current;
+        if(data < current -> value)
+        {
+            current = current -> left;
+        }
+        else if (data > current -> value)
+        {
+            current = current -> right;
+        }
+        else
+        {
+            break;
+        }
+    }
+    return tmp;
 }
