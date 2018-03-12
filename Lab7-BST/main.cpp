@@ -104,19 +104,21 @@ string BSTtoString(BST* bst) {
 	queue<NodeInterface*> readQ; // used to read in the levels of the tree, contains Node*
 	stringstream nodeReader_ss; // used to store the values of the nodes and the level-order sequence
 	int depth = 0; // the depth of a node on the tree
-
+	// cout << "in BSTtoString" << endl;
 	if (bst->getRootNode() == NULL) {
 		return "BST is empty";
 	}
-
+	// cout << "root not NULL" << endl;
 	readQ.push(bst->getRootNode()); // push the root node of the tree into the queue
 
 	while (!readQ.empty()) { // as long as the queue has a remaining node:
 		int i = readQ.size(); // store the number of nodes on this level of the tree
 		nodeReader_ss << depth << ":  ";
+		// cout << depth << ":  ";
 		for (; i > 0; i--) { // for each node on this level,
 			NodeInterface* nextNode = readQ.front(); // store the next node in the queue
 			nodeReader_ss << nextNode->getData() << " "; // store the data from the node into the ss
+			// cout << nextNode->getData() << " ";
 			if (nextNode->getLeftChild() != NULL) { // if there is a left child, push the left child into the queue
 				readQ.push(nextNode->getLeftChild());
 			}
@@ -126,6 +128,7 @@ string BSTtoString(BST* bst) {
 			readQ.pop(); // pop the node off of the queue, leaving its children in the queue
 		}
 		nodeReader_ss << "\n"; // push an endl into the ss to distinguish levels
+		// cout << endl;
 		depth++;
 	}
 

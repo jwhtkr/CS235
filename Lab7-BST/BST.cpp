@@ -14,6 +14,7 @@ Node* find(int);
 */
 Node * BST::getRootNode() const
 {
+    // cout << "getting root...";
     return root;
 }
 
@@ -58,7 +59,73 @@ bool BST::add(int data)
 */
 bool BST::remove(int data)
 {
-    
+    if (root != NULL)
+    {
+        return remove(root, data);
+    }
+    else {return false;}
+}
+
+bool BST::remove(Node* & tmp, int data)
+{
+    if(tmp != NULL)
+    {
+        if (tmp -> value > data) 
+        {
+            return remove(tmp -> left, data);
+        }
+        else if (tmp -> value < data)
+        {
+            return remove(tmp -> right, data);
+        }
+        else
+        {
+            Node* old = tmp;
+            if (tmp -> right == NULL)
+            {
+                tmp = tmp -> left;
+            }
+            else if (tmp -> left == NULL)
+            {
+                tmp = tmp -> right;
+            }
+            else
+            {
+                Node* current = tmp -> left;
+                Node* previous = current;
+                // if (current -> right != NULL)
+                // {
+                while (current -> right != NULL)
+                {
+                    previous = current; 
+                    current = current -> right;
+                    // cout << "previous = " << previous -> value << ", current = " << current -> value << endl;
+                }
+                // }
+                // cout << "switching " << current -> value << " for " << tmp -> value << endl;
+                tmp -> value = current -> value;
+                // cout << "connecting... "; //<< (current -> left) -> data << " to " << pre
+                if (previous != current)
+                {
+                    previous -> right = current -> left;
+                    // cout << previous -> left << " " << previous -> right << endl;
+                }
+                else
+                {
+                    tmp -> left = current -> left;
+                }
+                old = current;
+            }
+            // cout << "removing " << old -> value << endl;
+            delete old;
+            // cout << "removed" << endl;
+            return true;
+        }
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /*
@@ -66,7 +133,25 @@ bool BST::remove(int data)
 */
 void BST::clear()
 {
-    
+    if (root != NULL)
+    {
+        clear(root);
+    }
+    return;
+}
+
+void BST::clear(Node* & tmp)
+{
+    if (tmp -> right != NULL)
+    {
+        clear(tmp -> right);
+    }
+    if (tmp -> left != NULL)
+    {
+        clear(tmp -> left);
+    }
+    delete tmp;
+    tmp = NULL;
 }
 
 Node* BST::find (int data)

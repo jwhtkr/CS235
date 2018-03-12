@@ -38,11 +38,15 @@ public:
 	* @return false if remove is unsuccessful(i.e. the int is not in the tree)
 	*/
 	virtual bool remove(int data);
+	
+	virtual bool remove(Node* &, int);
 
 	/*
 	* Removes all nodes from the tree, resulting in an empty tree.
 	*/
 	virtual void clear();
+	
+	virtual void clear(Node* &);
 	
 	virtual Node* find(int);
 };
