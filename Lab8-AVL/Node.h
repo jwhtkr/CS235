@@ -7,6 +7,11 @@ using namespace std;
 class Node : public NodeInterface {
 friend class AVL;
 
+protected:
+    Node * left;
+    Node * right;
+    int value;
+    int height;
 public:
 	Node() {}
 	virtual ~Node() {}
