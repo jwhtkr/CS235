@@ -2,6 +2,11 @@
 
 using namespace std;
 
+AVL::AVL()
+{
+    root = NULL;
+}
+
 /*
 * Returns the root node for this tree
 *
@@ -9,7 +14,7 @@ using namespace std;
 */
 Node * AVL::getRootNode() const
 {
-    
+    return this -> root;
 }
 
 /*
@@ -21,7 +26,69 @@ Node * AVL::getRootNode() const
 */
 bool AVL::add(int data)
 {
-    
+    if (root != NULL)
+    {
+        return add(root, data);
+    }
+    else
+    {
+        root = new Node(data, 0);
+        // cout << "node " << data << " added at root" << endl;
+        return true;
+    }
+}
+
+bool AVL::add(Node* & current, int data)
+{
+    bool returnVal = false;
+    if (data > current -> value)
+    {
+        if (current -> right != NULL)
+        {
+            returnVal = add(current -> right, data);
+            if(returnVal && (current -> height) <= (current -> right) -> height)
+            {
+                (current -> height) = (current -> right) -> height + 1;
+            }
+            return returnVal;
+        }
+        else
+        {
+            current -> right = new Node(data, 0);
+            // cout << "node " << data << " added on right" << endl;
+            if((current -> height) <= (current -> right) -> height)
+            {
+                (current -> height) = (current -> right) -> height + 1;
+            }
+            return true;
+        }
+    }
+    else if (data < current -> value)
+    {
+        if (current -> left != NULL)
+        {
+            returnVal = add(current -> left, data);
+            if(returnVal && (current -> height) <= (current -> left) -> height)
+            {
+                (current -> height) = (current -> left) -> height + 1;
+            }
+            return returnVal;
+        }
+        else
+        {
+            current -> left = new Node(data, 0);
+            // cout << "node " << data << " added on left" << endl;
+            if((current -> height) <= (current -> left) -> height)
+            {
+                (current -> height) = (current -> left) -> height + 1;
+            }
+            return true;
+        }
+    }
+    else
+    {
+        return returnVal;
+    }
 }
 
 /*
@@ -41,5 +108,25 @@ bool AVL::remove(int data)
 */
 void AVL::clear()
 {
-    
+    if (root != NULL)
+    {
+        clear(root);
+    }
+    return;
+}
+
+void AVL::clear(Node* & tmp)
+{
+    if (tmp -> right != NULL)
+    {
+        clear(tmp -> right);
+    }
+    if (tmp -> left != NULL)
+    {
+        clear(tmp -> left);
+    }
+    // cout << "node " << tmp -> value << " being deleted" << endl;
+    delete tmp;
+    tmp = NULL;
+    // cout << "root = " << this -> root << endl;
 }

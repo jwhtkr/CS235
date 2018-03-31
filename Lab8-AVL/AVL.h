@@ -2,6 +2,7 @@
 
 #include "AVLInterface.h"
 #include "Node.h"
+#include <iostream>
 
 using namespace std;
 
@@ -10,7 +11,7 @@ protected:
     Node * root;
     
 public:
-	AVL() {}
+	AVL();
 	virtual ~AVL() {}
 
 	//Please note that the class that implements this interface must be made
@@ -31,6 +32,8 @@ public:
 	* @return false if unsuccessful (i.e. the int is already in tree)
 	*/
 	virtual bool add(int data);
+	
+	virtual bool add(Node* &, int);
 
 	/*
 	* Attempts to remove the given int from the AVL tree
@@ -45,4 +48,6 @@ public:
 	* Removes all nodes from the tree, resulting in an empty tree.
 	*/
 	virtual void clear();
+	
+	virtual void clear(Node* &);
 };

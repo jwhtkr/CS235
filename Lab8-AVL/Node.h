@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NodeInterface.h"
+#include<cstddef>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ protected:
     int height;
 public:
 	Node() {}
+	Node(int, int);
 	virtual ~Node() {}
 
 	/*

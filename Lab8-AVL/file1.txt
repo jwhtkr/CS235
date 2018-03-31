@@ -12,3 +12,4 @@ Add 8
 Add 7
 Add 9
 PrintBST
+Clear

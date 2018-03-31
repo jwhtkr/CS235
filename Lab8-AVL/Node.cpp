@@ -2,6 +2,14 @@
 
 using namespace std;
 
+Node::Node(int data, int sz)
+{
+    value = data;
+    height = sz;
+    left = NULL;
+    right = NULL;
+}
+
 /*
 * Returns the data stored in this node
 *
@@ -9,7 +17,7 @@ using namespace std;
 */
 int Node::getData() const
 {
-    
+    return this -> value;
 }
 
 /*
@@ -19,7 +27,7 @@ int Node::getData() const
 */
 Node * Node::getLeftChild() const
 {
-    
+    return this -> left;
 }
 
 /*
@@ -29,7 +37,7 @@ Node * Node::getLeftChild() const
 */
 Node * Node::getRightChild() const
 {
-    
+    return this -> right;
 }
 
 /*
@@ -44,5 +52,5 @@ Node * Node::getRightChild() const
 */
 int Node::getHeight()
 {
-    
+    return this -> height;
 }
