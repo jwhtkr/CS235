@@ -23,6 +23,9 @@ public:
 	* @return the root node for this tree.
 	*/
 	virtual Node * getRootNode() const;
+	
+	virtual void rotateLeft(Node* &);
+	virtual void rotateRight(Node* &);
 
 	/*
 	* Attempts to add the given int to the AVL tree
@@ -43,6 +46,8 @@ public:
 	* @return false if remove is unsuccessful(i.e. the int is not in the tree)
 	*/
 	virtual bool remove(int data);
+	
+	virtual bool remove(Node* &, int);
 
 	/*
 	* Removes all nodes from the tree, resulting in an empty tree.

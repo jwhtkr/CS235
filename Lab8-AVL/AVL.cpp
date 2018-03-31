@@ -17,6 +17,16 @@ Node * AVL::getRootNode() const
     return this -> root;
 }
 
+void AVL::rotateLeft(Node* & tmp)
+{
+    
+}
+
+void AVL::rotateRight(Node* & tmp)
+{
+    
+}
+
 /*
 * Attempts to add the given int to the AVL tree
 * Rebalances the tree if data is successfully added
@@ -99,6 +109,18 @@ bool AVL::add(Node* & current, int data)
 * @return false if remove is unsuccessful(i.e. the int is not in the tree)
 */
 bool AVL::remove(int data)
+{
+    if (root != NULL)
+    {
+        return remove(root, data);
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool AVL::remove(Node* & tmp, data)
 {
     
 }
