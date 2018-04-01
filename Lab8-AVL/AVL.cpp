@@ -106,7 +106,7 @@ bool AVL::add(Node* & current, int data)
     bool returnVal = false;
     if (data > current -> value)
     {
-        if (current -> right != NULL)
+        if (current -> right != NULL)a
         {
             returnVal = add(current -> right, data);
             if(returnVal && (current -> height) <= (current -> right) -> height)
