@@ -26,6 +26,7 @@ public:
 	
 	virtual void rotateLeft(Node* &);
 	virtual void rotateRight(Node* &);
+	virtual void setBalance(Node* &);
 
 	/*
 	* Attempts to add the given int to the AVL tree

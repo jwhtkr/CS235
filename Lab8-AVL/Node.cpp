@@ -2,12 +2,13 @@
 
 using namespace std;
 
-Node::Node(int data, int sz)
+Node::Node(int data)
 {
     value = data;
-    height = sz;
+    height = 1;
     left = NULL;
     right = NULL;
+    balance = BALANCED;
 }
 
 /*

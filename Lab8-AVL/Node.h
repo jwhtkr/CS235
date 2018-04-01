@@ -13,9 +13,10 @@ protected:
     Node * right;
     int value;
     int height;
+    enum balanceState{UNBALANCED_LEFT = -2, LEFT = -1, BALANCED = 0, RIGHT = 1, UNBALANCED_RIGHT = 2} balance;
 public:
 	Node() {}
-	Node(int, int);
+	Node(int);
 	virtual ~Node() {}
 
 	/*
@@ -50,4 +51,5 @@ public:
 	* @return the height of this tree with this node as the local root.
 	*/
 	virtual int getHeight();
+	
 };
