@@ -17,14 +17,14 @@ Node * AVL::getRootNode() const
     return this -> root;
 }
 
-void AVL::rotateLeft(Node* & tmp)
+Node * AVL::rotateLeft(Node* & tmp)
 {
-    cout << "rotating left" << endl;
+    // cout << "rotating left" << endl;
 }
 
-void AVL::rotateRight(Node* & tmp)
+Node * AVL::rotateRight(Node* & tmp)
 {
-    cout << "rotating right" << endl;
+    // cout << "rotating right" << endl;
 }
 
 void AVL::setBalance(Node* & tmp)
@@ -53,12 +53,12 @@ void AVL::setBalance(Node* & tmp)
         {
             if((tmp -> left) -> balance == Node::LEFT)
             {
-                cout << "Node " << tmp -> value << " has LL unbalance" << endl;
+                // cout << "Node " << tmp -> value << " has LL unbalance" << endl;
                 rotateRight(tmp);
             }
             else
             {
-                cout << "Node " << tmp -> value << " has LR unbalance" << endl;
+                // cout << "Node " << tmp -> value << " has LR unbalance" << endl;
                 rotateLeft(tmp -> left);
                 rotateRight(tmp);
             }
@@ -67,12 +67,12 @@ void AVL::setBalance(Node* & tmp)
         {
             if((tmp -> right) -> balance == Node::RIGHT)
             {
-                cout << "Node " << tmp -> value << " has RR unbalance" << endl;
+                // cout << "Node " << tmp -> value << " has RR unbalance" << endl;
                 rotateLeft(tmp);
             }
             else
             {
-                cout << "Node " << tmp -> value << " has RL unbalance" << endl;
+                // cout << "Node " << tmp -> value << " has RL unbalance" << endl;
                 rotateRight(tmp -> right);
                 rotateLeft(tmp);
             }
@@ -106,12 +106,13 @@ bool AVL::add(Node* & current, int data)
     bool returnVal = false;
     if (data > current -> value)
     {
-        if (current -> right != NULL)a
+        if (current -> right != NULL)
         {
             returnVal = add(current -> right, data);
             if(returnVal && (current -> height) <= (current -> right) -> height)
             {
                 (current -> height) = (current -> right) -> height + 1;
+                // cout << "Node " << current -> value << " has height " << current -> height << endl;
             }
             if (returnVal)
             {
@@ -126,7 +127,9 @@ bool AVL::add(Node* & current, int data)
             if((current -> height) <= (current -> right) -> height)
             {
                 (current -> height) = (current -> right) -> height + 1;
+                // cout << "Node " << current -> value << " has height " << current -> height << endl;
             }
+            setBalance(current);
             return true;
         }
     }
@@ -138,6 +141,7 @@ bool AVL::add(Node* & current, int data)
             if(returnVal && (current -> height) <= (current -> left) -> height)
             {
                 (current -> height) = (current -> left) -> height + 1;
+                // cout << "Node " << current -> value << " has height " << current -> height << endl;
             }
             if (returnVal)
             {
@@ -152,7 +156,9 @@ bool AVL::add(Node* & current, int data)
             if((current -> height) <= (current -> left) -> height)
             {
                 (current -> height) = (current -> left) -> height + 1;
+                // cout << "Node " << current -> value << " has height " << current -> height << endl;
             }
+            setBalance(current);
             return true;
         }
     }

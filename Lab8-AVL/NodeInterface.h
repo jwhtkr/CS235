@@ -42,4 +42,6 @@ public:
 	* @return the height of this tree with this node as the local root.
 	*/
 	virtual int getHeight() = 0;
+	
+	virtual int getBalance() = 0;
 };

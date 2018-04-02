@@ -52,4 +52,6 @@ public:
 	*/
 	virtual int getHeight();
 	
+	virtual int getBalance();
+	
 };

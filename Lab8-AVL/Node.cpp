@@ -55,3 +55,9 @@ int Node::getHeight()
 {
     return this -> height;
 }
+
+
+int Node::getBalance()
+{
+    return static_cast<int>(this -> balance);
+}

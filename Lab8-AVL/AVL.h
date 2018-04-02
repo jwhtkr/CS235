@@ -24,8 +24,8 @@ public:
 	*/
 	virtual Node * getRootNode() const;
 	
-	virtual void rotateLeft(Node* &);
-	virtual void rotateRight(Node* &);
+	virtual Node * rotateLeft(Node* &);
+	virtual Node * rotateRight(Node* &);
 	virtual void setBalance(Node* &);
 
 	/*
