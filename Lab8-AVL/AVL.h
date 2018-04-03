@@ -24,9 +24,11 @@ public:
 	*/
 	virtual Node * getRootNode() const;
 	
-	virtual Node * rotateLeft(Node* &);
-	virtual Node * rotateRight(Node* &);
+	virtual void setHeight(Node* &);
+	virtual void rotateLeft(Node* &);
+	virtual void rotateRight(Node* &);
 	virtual void setBalance(Node* &);
+	virtual void balance(Node* &);
 
 	/*
 	* Attempts to add the given int to the AVL tree
