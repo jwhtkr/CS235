@@ -11,7 +11,7 @@ Node* root;
     
 public:
 	BST() {root = NULL;}
-	virtual ~BST() {}
+	virtual ~BST() {clear();}
 
 	//Please note that the class that implements this interface must be made
 	//of objects which implement the NodeInterface
@@ -40,6 +40,8 @@ public:
 	virtual bool remove(int data);
 	
 	virtual bool remove(Node* &, int);
+	
+	virtual void replaceParent(Node* &, Node* &);
 
 	/*
 	* Removes all nodes from the tree, resulting in an empty tree.
