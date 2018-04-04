@@ -12,7 +12,7 @@ protected:
     
 public:
 	AVL();
-	virtual ~AVL() {}
+	virtual ~AVL();
 
 	//Please note that the class that implements this interface must be made
 	//of objects which implement the NodeInterface

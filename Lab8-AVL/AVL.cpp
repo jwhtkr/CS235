@@ -7,6 +7,11 @@ AVL::AVL()
     root = NULL;
 }
 
+AVL::~AVL()
+{
+    clear();
+}
+
 /*
 * Returns the root node for this tree
 *
