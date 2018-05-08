@@ -70,11 +70,11 @@ bool BST::remove(Node* & tmp, int data)
 {
     if(tmp != NULL)
     {
-        if (tmp -> value > data) 
+        if (data < tmp -> value) 
         {
             return remove(tmp -> left, data);
         }
-        else if (tmp -> value < data)
+        else if (data > tmp -> value)
         {
             return remove(tmp -> right, data);
         }
@@ -115,6 +115,7 @@ bool BST::remove(Node* & tmp, int data)
                     tmp -> left = current -> left;
                 }
                 old = current;
+                // replaceParent(old, old -> left);
             }
             // cout << "removing " << old -> value << endl;
             delete old;
@@ -125,6 +126,20 @@ bool BST::remove(Node* & tmp, int data)
     else
     {
         return false;
+    }
+}
+    
+void BST::replaceParent(Node* & old, Node* & local)
+{
+    if(local -> right != NULL)
+    {
+        replaceParent(old, local -> right);
+    }
+    else
+    {
+        old -> value = local -> value;
+        old = local;
+        local = local -> left;
     }
 }
 

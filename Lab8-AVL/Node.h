@@ -1,35 +1,44 @@
-//YOU MAY NOT MODIFY THIS DOCUMENT
-/*
-*/
 #pragma once
+
+#include "NodeInterface.h"
+#include<cstddef>
+
 using namespace std;
 
-class NodeInterface {
+class Node : public NodeInterface {
+friend class AVL;
 
+protected:
+    Node * left;
+    Node * right;
+    int value;
+    int height;
+    enum balanceState{UNBALANCED_LEFT = -2, LEFT = -1, BALANCED = 0, RIGHT = 1, UNBALANCED_RIGHT = 2} balance;
 public:
-	NodeInterface() {}
-	virtual ~NodeInterface() {}
+	Node() {}
+	Node(int);
+	virtual ~Node() {}
 
 	/*
 	* Returns the data stored in this node
 	*
 	* @return the data stored in this node.
 	*/
-	virtual int getData() const = 0;
+	virtual int getData() const;
 
 	/*
 	* Returns the left child of this node or null if empty left child.
 	*
 	* @return the left child of this node or null if empty left child.
 	*/
-	virtual NodeInterface * getLeftChild() const = 0;
+	virtual Node * getLeftChild() const;
 
 	/*
 	* Returns the right child of this node or null if empty right child.
 	*
 	* @return the right child of this node or null if empty right child.
 	*/
-	virtual NodeInterface * getRightChild() const = 0;
+	virtual Node * getRightChild() const;
 
 	/*
 	* Returns the height of this node. The height is the number of nodes
@@ -41,7 +50,8 @@ public:
 	*
 	* @return the height of this tree with this node as the local root.
 	*/
-	virtual int getHeight() = 0;
+	virtual int getHeight();
 	
-	virtual int getBalance() = 0;
+	virtual int getBalance();
+	
 };

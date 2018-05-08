@@ -116,7 +116,8 @@ string BSTtoString(AVL* bst) {
 		nodeReader_ss << depth << ":  ";
 		for (; i > 0; i--) { // for each node on this level,
 			NodeInterface* nextNode = readQ.front(); // store the next node in the queue
-			nodeReader_ss << nextNode->getData() << " "; // store the data from the node into the ss
+			nodeReader_ss << nextNode->getData() << " "; //<< "(" << nextNode->getHeight() << "," 
+				// << nextNode->getBalance() << ") "; // store the data from the node into the ss
 			if (nextNode->getLeftChild() != NULL) { // if there is a left child, push the left child into the queue
 				readQ.push(nextNode->getLeftChild());
 			}
