@@ -3,7 +3,7 @@ echo "Running Diff"
 echo "--------"
 rm turnin.txt
 rm details.txt
-for f in file*.txt;
+for f in file1.txt file2.txt file3.txt file4.txt;
 do
     f=${f#tests/}
     cat out_$f >> turnin.txt
