@@ -51,6 +51,8 @@ public:
 	virtual bool remove(int data);
 	
 	virtual bool remove(Node* &, int);
+	
+	virtual void replaceParent(Node* &, Node* &);
 
 	/*
 	* Removes all nodes from the tree, resulting in an empty tree.
